@@ -1,0 +1,5 @@
+# Ignore all .exe's
+**/*.exe
+
+# Ignore all configs
+**/*.json
