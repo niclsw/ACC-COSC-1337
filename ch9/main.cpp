@@ -10,6 +10,22 @@ struct ListOfSongs {
     string song;
 };
 
+void getData(ListOfSongs Playlist[], int);
+void sortList(ListOfSongs Playlist[], int);
+void displayList(ListOfSongs Playlist[], int);
+
+int main() {
+
+    int SIZE = 10;
+    ListOfSongs Playlist[10];
+
+    getData(Playlist, SIZE);
+
+    sortList(Playlist, SIZE);
+
+    displayList(Playlist, SIZE);
+}
+
 void getData(ListOfSongs Playlist[], int SIZE) {
 
     string artistName;
@@ -27,14 +43,20 @@ void getData(ListOfSongs Playlist[], int SIZE) {
 
 void sortList(ListOfSongs Playlist[], int SIZE) {
 
-    for(int i = 0; i < SIZE; i++) {
+    for(int i = 0; i < SIZE-1; i++) {
+        
+        int minIndex = i;
+
         for(int y = i+1; y < SIZE; y++) {
-            if (Playlist[i].artist > Playlist[y].artist) {
-                ListOfSongs temp = Playlist[i];
-                Playlist[i] = Playlist[y];
-                Playlist[y] = temp;
+            
+            if (Playlist[y].artist < Playlist[minIndex].artist) {
+                i = y;
             }
         }
+
+        ListOfSongs temp = Playlist[i];
+        Playlist[i] = Playlist[minIndex];
+        Playlist[minIndex] = temp;
     }
 }
 
@@ -47,17 +69,4 @@ void displayList(ListOfSongs Playlist[], int SIZE) {
         cout << setw(20) << left << Playlist[i].artist 
              << setw(20) << Playlist[i].song << endl;
     }
-}
-
-int main() {
-
-    int SIZE = 10;
-
-    ListOfSongs Playlist[10];
-    
-    getData(Playlist, SIZE);
-
-    sortList(Playlist, SIZE);
-
-    displayList(Playlist, SIZE);
 }
