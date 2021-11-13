@@ -2,4 +2,6 @@
 **/*.exe
 
 # Ignore all configs
-**/*.json
+*.json
+
+**/.vscode/*
