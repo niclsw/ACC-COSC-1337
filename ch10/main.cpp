@@ -3,9 +3,9 @@
 #include <algorithm>
 
 void getData(int, int);
-void sortData(int *, int);
-void displayData();
-int average();
+void sortData(int, int);
+void displayData(int, int);
+int average(int, int);
 
 int main() {
 
@@ -46,7 +46,8 @@ void getData(int *numOfMovies[], int numOfStudents) {
 
 void sortData(int *numOfMovies[], int numOfStudents) {
 
-
+    std::sort(std::begin(numOfMovies), std::end(numOfMovies));
+    // doesn't work with pointers i guess
 
 }
 
