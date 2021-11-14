@@ -67,6 +67,7 @@ void getData(int *movieArray, int numOfStudents) {
     // For loop to put data into movieArray
     for (int i = 0; i < numOfStudents; i++) {
         
+        // Error check to make sure user enters a number >= 0
         do {
             std::cout << i+1 << ": ";
             std::cin >> movieArray[i];
@@ -74,7 +75,7 @@ void getData(int *movieArray, int numOfStudents) {
             if (movieArray[i] < 0) {
                 std::cout << "Number of movies can not be negative" << std::endl;
             }
-            
+
         } while (movieArray[i] < 0);
     }
 }
