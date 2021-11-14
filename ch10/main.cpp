@@ -64,6 +64,7 @@ void getData(int *movieArray, int numOfStudents) {
     std::cout << "-------------------------------------" << std::endl;
     std::cout << "Enter Number of movies each student watched" << std::endl;
 
+    // For loop to put data into movieArray
     for (int i = 0; i < numOfStudents; i++) {
         std::cout << i+1 << ": ";
         std::cin >> movieArray[i];
@@ -72,39 +73,41 @@ void getData(int *movieArray, int numOfStudents) {
 
 void sortData(int *movieArray, int numOfStudents) {
 
+    // Sort the movie array from smallest to largest numbers
     std::sort(movieArray, movieArray+numOfStudents);
 
 }
 
 void displayData(int *movieArray, int numOfStudents) {
 
+    // Obtain average from average function
     double avg = average(movieArray, numOfStudents);
 
     std::cout << std::endl;
     std::cout << "Number of Movies Watched per Student" << std::endl;
     std::cout << "-------------------------------------" << std::endl;
 
+    // for loop to print out elements of array
     for (int i = 0; i < numOfStudents; i++) {
 
         std::cout << movieArray[i] << std::endl;
 
     }
 
+    // print out the average
     std::cout << "-------------------------------------" << std::endl;
     std::cout << "Average = " << std::setprecision(1) << std::fixed << avg;
 }
 
 int average(int *movieArray, int numOfStudents) {
-    double average;
+    // declare variable
     double total = 0.0;
-    double count = 0.0;
 
+    // for loop to calculate the total of all elements in array
     for (int i = 0; i < numOfStudents; i++) {
         total += movieArray[i];
-        count++;
     }
 
-    average = total / count;
-
-    return average;
+    // return the average
+    return (total / numOfStudents);
 }
