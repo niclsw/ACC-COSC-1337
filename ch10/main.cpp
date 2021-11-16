@@ -14,7 +14,7 @@
 void getData(int *, int);
 void sortData(int *, int);
 void displayData(int *, int);
-int average(int *, int);
+double average(int *, int);
 
 int main() {
 
@@ -108,7 +108,7 @@ void displayData(int *movieArray, int numOfStudents) {
     std::cout << "Average = " << std::setprecision(1) << std::fixed << avg;
 }
 
-int average(int *movieArray, int numOfStudents) {
+double average(int *movieArray, int numOfStudents) {
     // declare variable
     double total = 0.0;
 
