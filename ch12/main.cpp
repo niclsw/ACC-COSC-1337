@@ -16,8 +16,6 @@ std::string seperate(char *);
 std::string upper(char *);
 std::string lower(char *);
 std::string flip(char *);
-void reassign(std::string, char *);
-
 
 int main() {
 
