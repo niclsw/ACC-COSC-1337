@@ -42,6 +42,8 @@ int main() {
         std::cin >> option;
         std::cout << std::endl;
 
+        fflush(stdin);
+
     } while (option == 'Y' || option == 'y');
     
 
@@ -105,12 +107,13 @@ std::string flip(char *inputChar) {
     // assign output to the seperated char
     std::string output = seperate(inputChar);
 
+    // Check if char is an upper or lower
     for (int i{0}; i < output.length(); i++) {
         if (isupper(output[i])) {
             output[i] = tolower(output[i]);
         }
             
-        if (islower(output[i])) {
+        else if (islower(output[i])) {
             output[i] = toupper(output[i]);
         }
             
