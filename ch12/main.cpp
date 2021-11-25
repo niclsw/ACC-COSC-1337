@@ -28,6 +28,7 @@ int main() {
         std::cout << "Enter a word: ";
         std::cin.getline(inputChar, 100);
 
+        // Begin displaying the word with format
         std::cout << std::endl;
         std::cout << "=======================" << std::endl;
 
@@ -38,10 +39,12 @@ int main() {
 
         std::cout << "=======================" << std::endl;
 
+        // Ask user if they want to enter another word
         std::cout << "Do you want to do another word(Y/y): ";
         std::cin >> option;
         std::cout << std::endl;
 
+        // Clear the stream
         fflush(stdin);
 
     } while (option == 'Y' || option == 'y');
