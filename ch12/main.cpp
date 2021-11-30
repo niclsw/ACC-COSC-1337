@@ -141,7 +141,6 @@ bool errorCheck(char *inputChar) {
         if (!isalpha(inputChar[i])) {
             errorCheck = false; // assign errorCheck to false if non-alpha found
         }
-
     }
 
     // Print error message if non-alpha found
