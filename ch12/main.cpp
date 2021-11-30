@@ -16,17 +16,23 @@ std::string seperate(char *);
 std::string upper(char *);
 std::string lower(char *);
 std::string flip(char *);
+bool errorCheck(char *);
 
 int main() {
 
     char inputChar[100];
     char option = 'Y';
 
+
     // Do while loop to allow multiple words
     do {
         // Take input from user
-        std::cout << "Enter a word: ";
-        std::cin.getline(inputChar, 100);
+        // Check if what was entered is not a letter
+        do {
+            std::cout << "Enter a word: ";
+            std::cin.getline(inputChar, 100);
+        } while (!errorCheck(inputChar));
+        
 
         // Begin displaying the word with format
         std::cout << std::endl;
@@ -123,4 +129,26 @@ std::string flip(char *inputChar) {
     }
 
     return output;
+}
+
+bool errorCheck(char *inputChar) {
+    
+    // Default errorCheck = true
+    bool errorCheck = true;
+
+    // Go through each char in array and check if it is not alpha
+    for(int i{0}; i < std::strlen(inputChar); i++) {
+        if (!isalpha(inputChar[i])) {
+            errorCheck = false; // assign errorCheck to false if non-alpha found
+        }
+
+    }
+
+    // Print error message if non-alpha found
+    if (!errorCheck) {
+        std::cout << "Error - number found" << std::endl;
+    }
+
+    return errorCheck;
+
 }
