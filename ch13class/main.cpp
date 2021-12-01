@@ -83,6 +83,10 @@ void Encode::decrypt(std::string encFileName, std::string decFileName) {
         int temp = (c - key);
         decryptedFile << (char)temp;
     }
+
+    // Close the files
+    encryptedFile.close();
+    decryptedFile.close();
 }
 
 // Mutator for private key
@@ -110,13 +114,6 @@ int main() {
         std::cout << "Choice: ";
         std::cin >> c;
 
-        // do {
-        //     std::cin >> c;
-        //     if (c != '1' || c != '2' || c != '3') {
-        //         std::cout << "\nChoice must be 1, 2 or 3..." << std::endl;
-        //     }
-        // } while (c != '1' || c != '2' || c != '3');
-
         // Switch for the menu
         switch (c) {
             case '1': {
@@ -128,7 +125,7 @@ int main() {
                 std::cin >> uncFileName;
 
 
-                std::cout << "\nEnter the name for the encrypted file: ";
+                std::cout << "Enter the name for the encrypted file: ";
                 std::cin >> encFileName;
 
                 encodeObj.encrypt(uncFileName, encFileName);
@@ -143,7 +140,7 @@ int main() {
                 std::cin >> encFileName;
 
 
-                std::cout << "\nEnter the name for the file to be decrypted: ";
+                std::cout << "Enter the name for the file to be decrypted: ";
                 std::cin >> decFileName;
                 encodeObj.decrypt(encFileName, decFileName);
                 break;
