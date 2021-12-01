@@ -1,3 +1,10 @@
+// Nick Walker
+// ACC-COSC-1337
+// This program is an example of a class being used to encode and decode files
+// It will prompt the user to select from a menu with the options to encrypt,
+// decrypt, or set a key.
+// Note: You MUST set a key for the file to encrypt
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -26,33 +33,34 @@ class Encode {
 // Encrypt function
 void Encode::encrypt(std::string uncFileName, std::string encFileName) {
 
-    std::fstream inFile, outFile;
+    std::fstream uncFile, encFile;
 
     // Open the unencrypted file
     // Detect any errors with the file open operation
-    inFile.open(uncFileName, std::ios::in);
+    uncFile.open(uncFileName, std::ios::in);
     if (!inFile) {
-        std::cout << "Error opening original file\n" << std::endl;
+        std::cout << "Error opening unecrypted file\n" << std::endl;
         atexit(fileOpenError); // Go to fileOpenError function
     }
 
     // Open the file that will be encrypted
     // Detect any errors with the file open operation
-    outFile.open(encFileName, std::ios::out);
+    encFile.open(encFileName, std::ios::out);
     if (!outFile) {
-        std::cout << "Eror opening out file\n" << std::endl;
+        std::cout << "Error opening encrypted file\n" << std::endl;
         atexit(fileOpenError);
     }
 
     // Read data from the inFile to the new file 
-    while(inFile >> std::noskipws >> c) {
+    // do not skip white spaces while going through each char
+    while(uncFile >> std::noskipws >> c) {
         int temp = (c + key); // encrypt each char of inFile with the key
-        outFile << (char)temp;
+        encFile << (char)temp;
     }
 
     // Close the files
-    inFile.close();
-    outFile.close();
+    uncFile.close();
+    encFile.close();
 
 }
 
