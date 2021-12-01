@@ -8,9 +8,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 // Prototype
-void fileOpenError(void);
+void returnToMenu(void);
+bool isInt(const std::string&);
 
 // Class Encode
 class Encode {
@@ -27,7 +29,7 @@ class Encode {
         }
         void encrypt(std::string, std::string);
         void decrypt(std::string, std::string);
-        void setKey(int);
+        void setKey(std::string);
 };
 
 // Encrypt function
@@ -38,17 +40,17 @@ void Encode::encrypt(std::string uncFileName, std::string encFileName) {
     // Open the unencrypted file
     // Detect any errors with the file open operation
     uncFile.open(uncFileName, std::ios::in);
-    if (!inFile) {
+    if (!uncFile) {
         std::cout << "Error opening unecrypted file\n" << std::endl;
-        atexit(fileOpenError); // Go to fileOpenError function
+        atexit(returnToMenu); // Go to returnToMenu function
     }
 
     // Open the file that will be encrypted
     // Detect any errors with the file open operation
     encFile.open(encFileName, std::ios::out);
-    if (!outFile) {
+    if (!encFile) {
         std::cout << "Error opening encrypted file\n" << std::endl;
-        atexit(fileOpenError);
+        atexit(returnToMenu);
     }
 
     // Read data from the inFile to the new file 
@@ -74,7 +76,7 @@ void Encode::decrypt(std::string encFileName, std::string decFileName) {
     encryptedFile.open(encFileName, std::ios::in);
     if (!encryptedFile) {
         std::cout << "Error opening encrypted file\n" << std::endl;
-        atexit(fileOpenError);
+        atexit(returnToMenu);
     }
 
     // Open the file that will show the uncrypted text
@@ -82,7 +84,7 @@ void Encode::decrypt(std::string encFileName, std::string decFileName) {
     decryptedFile.open(decFileName, std::ios::out);
     if (!decryptedFile) {
         std::cout << "Error opening decrypted file\n" << std::endl;
-        atexit(fileOpenError);
+        atexit(returnToMenu);
     }
 
     // Begin decrypting the encryptedFile and put decrypted chars
@@ -98,8 +100,8 @@ void Encode::decrypt(std::string encFileName, std::string decFileName) {
 }
 
 // Mutator for private key
-void Encode::setKey(int newKey) {
-    key = newKey;
+void Encode::setKey(std::string newKey) {
+    key = stoi(newKey);
 
     std::cout << "\n*** NEW KEY IS " << newKey << " ***\n\n";
 }
@@ -112,14 +114,18 @@ int main() {
     Encode encodeObj;
     char c;
 
+    // Intro
+    std::cout << "Note: you must set a key if you want the file to be encrypted\n";
+    std::cout << "Note: Enter anything other than 1, 2, or 3 to EXIT\n\n";
+
     do {
         // Main Menu
         std::cout << "=== WEAK ENCRYPT : MENU ===" << std::endl;
         std::cout << "(1) Encrypt" << std::endl;
         std::cout << "(2) Decrypt" << std::endl;
         std::cout << "(3) Set Key" << std::endl;
-        std::cout << "(4) Exit" << std::endl;
-        std::cout << "Choice: ";
+        std::cout << "(ANY) Exit" << std::endl;
+        std::cout << "Option: ";
         std::cin >> c;
 
         // Switch for the menu
@@ -157,21 +163,27 @@ int main() {
 
                 std::cout << "\n\n=== WEAK ENCRYPT : Set Key ===" << std::endl;
 
-                int newKey;
+                std::string newKey;
+                bool testKey = true;
 
                 do {
+                    
                     std::cout << "\nEnter a key: ";
                     std::cin >> newKey;
-                    if (!std::cin) {
-                        std::cout << "\nThe key must be an integer..." << std::endl;
+                    testKey = isInt(newKey); // tests if user input is integer
+
+                    if (!testKey) {
+                        std::cout << "\nKey must be all integers" << std::endl;
                     }
-                    fflush(stdin);
-                } while(!std::cin);
+
+                } while(!testKey);
+
+                // send newKey to class mutator
                 encodeObj.setKey(newKey);
                 break;
             }
             default: {
-                return 0;
+                return 1;
             }
         }
     } while(c != '4');
@@ -179,6 +191,16 @@ int main() {
 
 // This somehow works it calls the main function again.
 // After adding this, you have to enter 4 to exit twice.
-void fileOpenError(void) {
+void returnToMenu(void) {
     main();
+}
+
+bool isInt(const std::string& str) {
+    bool test;
+
+    // Found this online that checks each char of a string to see if they are all
+    // integers. If it is not an integer, it returns false. 
+    return !str.empty() &&
+        std::find_if(str.begin(), str.end(),
+            [](unsigned char c) { return !std::isdigit(c); }) == str.end();
 }
