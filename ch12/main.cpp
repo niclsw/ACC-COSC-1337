@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include <ctype.h>
+#include <cctype>
 
 std::string seperate(char *);
 std::string upper(char *);
