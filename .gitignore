@@ -4,4 +4,8 @@
 # Ignore all configs
 *.json
 
+# Ignore all vscode files
 **/.vscode/*
+
+# Ignore all examples
+**/ch13Examples/*
