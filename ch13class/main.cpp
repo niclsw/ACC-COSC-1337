@@ -21,7 +21,7 @@ class Encode {
         int key;
         std::string fileName;
         char c;
-    public:
+    public: 
         Encode() {
             key = 0;
             fileName = "";
@@ -101,7 +101,7 @@ void Encode::decrypt(std::string encFileName, std::string decFileName) {
 
 // Mutator for private key
 void Encode::setKey(std::string newKey) {
-    key = stoi(newKey);
+    key = stoi(newKey); //stoi converts string to int
 
     std::cout << "\n*** NEW KEY IS " << newKey << " ***\n\n";
 }
@@ -200,6 +200,9 @@ bool isInt(const std::string& str) {
 
     // Found this online that checks each char of a string to see if they are all
     // integers. If it is not an integer, it returns false. 
+    // false if empty 
+    // find if not a digit 0 - 9
+
     return !str.empty() &&
         std::find_if(str.begin(), str.end(),
             [](unsigned char c) { return !std::isdigit(c); }) == str.end();

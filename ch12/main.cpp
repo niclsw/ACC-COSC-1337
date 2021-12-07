@@ -31,7 +31,7 @@ int main() {
         do {
             std::cout << "Enter a word: ";
             std::cin.getline(inputChar, 100);
-        } while (!errorCheck(inputChar));
+        } while (!errorCheck(inputChar)); // while not true
         
 
         // Begin displaying the word with format
